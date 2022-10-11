@@ -288,8 +288,6 @@ span.glyphicon.glyphicon-tags {
   display: block;
 }
 
-.btn-toolbar .btn,
-.discover .btn { margin-bottom: 5px; }
 .button-link { color: #fff; }
 
 .btn-primary:hover,

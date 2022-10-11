@@ -15,10 +15,10 @@
  *  along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var direction = $("#asc").data('order');  // 0=Descending order; 1= ascending order
-var sort = 0;       // Show sorted entries
+var direction = $("#asc").data("order"); // 0=Descending order; 1= ascending order
+var sort = 0; // Show sorted entries
 
-$("#sort_name").click(function() {
+$("#sort_name").click(function () {
     $("#sort_name").toggleClass("active");
     var className = $("h1").attr("Class") + "_sort_name";
     var obj = {};
@@ -34,8 +34,8 @@ $("#sort_name").click(function() {
     var listItems = $("#list").children(".row");
     var listlength = listItems.length;
     // check for each element if its Starting character matches
-    $(".row").each(function() {
-        if ( sort === 1) {
+    $(".row").each(function () {
+        if (sort === 1) {
             store = this.attributes["data-name"];
         } else {
             store = this.attributes["data-id"];
@@ -50,7 +50,7 @@ $("#sort_name").click(function() {
     if (count > 20) {
         var middle = parseInt(count / 2, 10) + (count % 2);
         // search for the middle of all visibe elements
-        $(".row").each(function() {
+        $(".row").each(function () {
             index++;
             if ($(this).css("display") !== "none") {
                 middle--;
@@ -65,7 +65,7 @@ $("#sort_name").click(function() {
     sort = (sort + 1) % 2;
 });
 
-$("#desc").click(function() {
+$("#desc").click(function () {
     if (direction === 0) {
         return;
     }
@@ -74,11 +74,11 @@ $("#desc").click(function() {
 
     var page = $(this).data("id");
     $.ajax({
-        method:"post",
+        method: "post",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         url: getPath() + "/ajax/view",
-        data: "{\"" + page + "\": {\"dir\": \"desc\"}}",
+        data: '{"' + page + '": {"dir": "desc"}}',
     });
     var index = 0;
     var list = $("#list");
@@ -96,7 +96,7 @@ $("#desc").click(function() {
 
         //var middle = parseInt(count / 2) + (count % 2);
         // search for the middle of all visible elements
-        $(reversed).each(function() {
+        $(reversed).each(function () {
             index++;
             if ($(this).css("display") !== "none") {
                 middle--;
@@ -114,8 +114,7 @@ $("#desc").click(function() {
     direction = 0;
 });
 
-
-$("#asc").click(function() {
+$("#asc").click(function () {
     if (direction === 1) {
         return;
     }
@@ -124,11 +123,11 @@ $("#asc").click(function() {
 
     var page = $(this).data("id");
     $.ajax({
-        method:"post",
+        method: "post",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         url: getPath() + "/ajax/view",
-        data: "{\"" + page + "\": {\"dir\": \"asc\"}}",
+        data: '{"' + page + '": {"dir": "asc"}}',
     });
     var index = 0;
     var list = $("#list");
@@ -145,7 +144,7 @@ $("#asc").click(function() {
 
         //var middle = parseInt(count / 2) + (count % 2);
         // search for the middle of all visible elements
-        $(reversed).each(function() {
+        $(reversed).each(function () {
             index++;
             if ($(this).css("display") !== "none") {
                 middle--;
@@ -164,7 +163,7 @@ $("#asc").click(function() {
     direction = 1;
 });
 
-$("#all").click(function() {
+$("#all").click(function () {
     $("#all").addClass("active");
     $(".char").removeClass("active");
     var cnt = $("#second").contents();
@@ -174,7 +173,7 @@ $("#all").click(function() {
     var listlength = listItems.length;
     var middle = parseInt(listlength / 2, 10) + (listlength % 2);
     // go through all elements and make them visible
-    listItems.each(function() {
+    listItems.each(function () {
         $(this).show();
     });
     // Move second half of all elements
@@ -183,22 +182,27 @@ $("#all").click(function() {
     }
 });
 
-$(".char").click(function() {
+$(".char").click(function () {
     $(".char").removeClass("active");
     $(this).addClass("active");
     $("#all").removeClass("active");
-    var character = this.innerText;
-    var count = 0;
-    var index = 0;
+    let character = this.innerText;
+    let count = 0;
+    let index = 0;
     // Append 2nd half of list to first half for easier processing
-    var cnt = $("#second").contents();
+    let cnt = $("#second").contents();
+
     $("#list").append(cnt);
     // Count no of elements
-    var listItems = $("#list").children(".row");
-    var listlength = listItems.length;
+    let listItems = $("#list").children(".row");
+    let listlength = listItems.length;
     // check for each element if its Starting character matches
-    $(".row").each(function() {
-        if (this.attributes["data-id"].value.charAt(0).toUpperCase() !== character) {
+    listItems.each(function () {
+        // debugger;
+        console.log(this);
+        console.log(this.attributes["data-id"]);
+        console.log(this.dataset);
+        if (this.attributes["data-id"]?.value.charAt(0).toUpperCase() !== character) {
             $(this).hide();
         } else {
             $(this).show();
@@ -209,7 +213,7 @@ $(".char").click(function() {
         // Find count of middle element
         var middle = parseInt(count / 2, 10) + (count % 2);
         // search for the middle of all visibe elements
-        $(".row").each(function() {
+        $(".row").each(function () {
             index++;
             if ($(this).css("display") !== "none") {
                 middle--;
