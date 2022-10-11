@@ -198,10 +198,6 @@ $(".char").click(function () {
     let listlength = listItems.length;
     // check for each element if its Starting character matches
     listItems.each(function () {
-        // debugger;
-        console.log(this);
-        console.log(this.attributes["data-id"]);
-        console.log(this.dataset);
         if (this.attributes["data-id"]?.value.charAt(0).toUpperCase() !== character) {
             $(this).hide();
         } else {
